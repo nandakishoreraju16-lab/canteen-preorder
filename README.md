@@ -28,4 +28,5 @@ Backend: FastAPI + SQLite · Frontend: React
 |10: 30 |created README.md by RAJU | creating Folders of Forntend and Backend by Monica| none  |
 |10: 50 | created backend and frontend folders by Monica | jyoshana creating "database"| none|
 |11: 05 | created "Database" by jyoshans| now we will create seperate branches for all of us and work on E1 endpoints| none|
-|
+|11:40| jyoshana created database and working on sample data| Now Nanda kishore raju will install al teh frontend components and display the canteen-preorder on localhost 5173| Jyoshana have a doubt on how to create a sample data and she figured it out by seeing sir files|
+|12:01| Done with creating Frontend react and displayed teh canteen-preorder on localhost 5173| next we will work completely on Backend and Raju will help on backend and learn how to do them pergectly| No issues|
