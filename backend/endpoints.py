@@ -19,7 +19,7 @@ def get_student_orders(roll_no):
 
     for order in orders:
 
-        if order.ordered_at.date() == datetime.now().date():
+        if order.ordered_at() == datetime.now():
 
             response.append({
                 "id": order.id,
@@ -121,7 +121,7 @@ def get_kitchen_queue():
 
     for order in orders:
 
-        if order.ordered_at.date() == datetime.now().date():
+        if order.ordered_at.date() == datetime.now():
 
             if order.status == "placed" or order.status == "preparing" or order.status == "ready":
 

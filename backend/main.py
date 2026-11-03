@@ -8,7 +8,7 @@ app = FastAPI()
 def menu():
     return functions.menu_items()
 
-<<<<<<< HEAD
+
 
 # E6 - Get Student's Orders for Today
 
@@ -44,7 +44,7 @@ def get_kitchen_queue():
 @app.get("/kitchen/sales")
 def get_today_sales():
     return endpoints.get_today_sales()
-=======
+
 @app.get("/sample orders")
 def menu():
     return functions.orders()
@@ -74,4 +74,4 @@ def place_order(roll_no: str, item_id: int, quantity: int):
 def get_order(id: int):
     return functions.get_order_by_id(id)
     
->>>>>>> df8e62e7312a015b8a49858f59f529c77ac82dcb
+
