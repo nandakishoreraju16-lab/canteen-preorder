@@ -25,4 +25,7 @@ Backend: FastAPI + SQLite · Frontend: React
 
 | Time | Done | Next | Stuck on |
 |---|---|---|---|
-|  |  |  |  |
+|10: 30 |created README.md by RAJU | creating Folders of Forntend and Backend by Monica| none  |
+|10: 50 | created backend and frontend folders by Monica | jyoshana creating "database"| none|
+|11: 05 | created "Database" by jyoshans| now we will create seperate branches for all of us and work on E1 endpoints| none|
+|
