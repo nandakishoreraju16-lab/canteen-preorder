@@ -115,22 +115,32 @@ def get_kitchen_queue():
 
     session = Session(functions.engine)
 
-    orders = session.query(functions.Order).all()
+    orders = session.query(functions.Order).order_by(functions.Order.ordered_at).all()
 
     response = []
 
     for order in orders:
 
-        if order.status == "placed" or order.status == "preparing" or order.status == "ready":
+        if order.ordered_at.date() == datetime.now().date():
 
-            response.append({
-                "id": order.id,
-                "roll_no": order.roll_no,
-                "item_id": order.item_id,
-                "quantity": order.quantity,
-                "status": order.status,
-                "ordered_at": order.ordered_at
-            })
+            if order.status == "placed" or order.status == "preparing" or order.status == "ready":
+
+                item = session.get(functions.MenuItem, order.item_id)
+
+                if item is not None:
+                    item_name = item.name
+                else:
+                    item_name = None
+
+                response.append({
+                    "id": order.id,
+                    "roll_no": order.roll_no,
+                    "item_id": order.item_id,
+                    "item_name": item_name,
+                    "quantity": order.quantity,
+                    "status": order.status,
+                    "ordered_at": order.ordered_at
+                })
 
     session.close()
 
@@ -151,7 +161,7 @@ def get_today_sales():
 
     for order in orders:
 
-        if order.status == "collected" and order.collected_at.date() == datetime.now().date():
+        if order.status == "collected" and order.collected_at is not None and order.collected_at.date() == datetime.now().date():
 
             item = session.get(functions.MenuItem, order.item_id)
 
