@@ -8,22 +8,22 @@ Base = declarative_base()
  
 class MenuItem(Base): 
     __tablename__ = "menu_items" 
-    id = Column[int](Integer, primary_key=True) 
-    name = Column[str](String) 
-    category = Column[str](String) 
-    price = Column[int](Integer) 
-    available = Column[int](Integer, default=1) 
+    id = Column(Integer, primary_key=True) 
+    name = Column(String) 
+    category = Column(String) 
+    price = Column(Integer) 
+    available = Column(Integer, default=1) 
  
  
 class Order(Base): 
     __tablename__ = "orders" 
-    id = Column[int](Integer, primary_key=True) 
-    roll_no = Column[str](String) 
-    item_id = Column[int](Integer, ForeignKey("menu_items.id")) 
-    quantity = Column[int](Integer) 
-    status = Column[str](String, default="placed") 
-    ordered_at = Column[DateTime](DateTime, default=datetime.now) 
-    collected_at = Column[DateTime](DateTime, nullable=True) 
+    id = Column(Integer, primary_key=True) 
+    roll_no = Column(String) 
+    item_id = Column(Integer, ForeignKey("menu_items.id")) 
+    quantity = Column(Integer) 
+    status = Column(String, default="placed") 
+    ordered_at = Column(DateTime, default=datetime.now) 
+    collected_at = Column(DateTime, nullable=True) 
 Base.metadata.create_all(engine) 
  
 def menu_items(): 
