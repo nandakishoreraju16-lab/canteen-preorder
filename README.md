@@ -17,7 +17,7 @@ Backend: FastAPI + SQLite · Frontend: React
 
 | Name | What we will do today |
 |---|---|
-| Jyoshana | Create `canteen.db` with the `menu_items` and `orders` tables and the sample data. Endpoints E1 to E5 (menu, add item, sold out, place order, one order) and their rules (sold out, 2 orders limit). |
+| Jyoshna | Create `canteen.db` with the `menu_items` and `orders` tables and the sample data. Endpoints E1 to E5 (menu, add item, sold out, place order, one order) and their rules (sold out, 2 orders limit). |
 | Monica | Endpoints E6 to E10 (my orders, next status, cancel, kitchen queue, today's sales) and their rules (status order, cancel only when placed). |
 | Nanda Kishore Raju | Fill the endpoint table with the backend team. Set up the React app and make the Menu, My orders and Kitchen components. |
 
