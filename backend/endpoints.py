@@ -15,8 +15,6 @@ def get_student_orders(roll_no, active=True):
         functions.Order.roll_no == roll_no
     ).order_by(functions.Order.ordered_at.desc()).all()
     
-    
-
     response = []
 
     for order in orders:
