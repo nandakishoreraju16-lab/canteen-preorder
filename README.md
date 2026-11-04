@@ -28,4 +28,4 @@ Backend: FastAPI + SQLite · Frontend: React
 |10: 30 |created README.md by RAJU | creating Folders of Forntend and Backend by Monica| none  |
 |10: 50 | created backend and frontend folders by Monica | jyoshana creating "database"| none|
 |11: 05 | created "Database" by jyoshans| now we will create seperate branches for all of us and work on E1 endpoints| none|
-|
+|10: 46 |Monica implemented backend functions E6–E10 |Test all assigned endpoints using Swagger UI |Debugging the Kitchen Queue endpoint
