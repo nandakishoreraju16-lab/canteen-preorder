@@ -101,4 +101,3 @@ def menu():
 @app.get("/sample orders")
 def menu():
     return functions.orders()
-
