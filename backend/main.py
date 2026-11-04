@@ -1,12 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import functions
-
 import endpoints
-
-
-
-
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -108,5 +103,3 @@ def place_order(roll_no:str,item_id:int,quantity:int):
 @app.get("/orders/{id}")
 def get_order(id: int):
     return functions.get_order_by_id(id)
-    
-
