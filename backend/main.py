@@ -14,8 +14,6 @@ app.add_middleware(
 def menu():
     return functions.menu_items()
 
-
-
 # E6 - Get Student's Orders for Today
 
 @app.get("/orders/student/{roll_no}")
