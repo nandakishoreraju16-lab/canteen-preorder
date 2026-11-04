@@ -1,8 +1,19 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import functions
+<<<<<<< HEAD
 import endpoints
+=======
+>>>>>>> e7499a099c1c48621f3278090c17d92eafd9c721
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/sample menu")
 def menu():
