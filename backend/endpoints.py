@@ -18,7 +18,7 @@ def get_student_orders(roll_no):
     response = []
 
     for order in orders:
-        if functions.order.ordered_at == datetime.now():
+        if order.ordered_at.strftime("%d-%m-%Y") == datetime.now().strftime("%d-%m-%Y"):
             response.append({
                 "id": order.id,
                 "roll_no": order.roll_no,
@@ -110,7 +110,7 @@ def get_kitchen_queue():
     response = []
     for order in orders:
 
-        if order.ordered_at == datetime.now():
+        if order.ordered_at.strftime("%d-%m-%Y") == datetime.now().strftime("%d-%m-%Y"):
 
             if order.status == "placed" or order.status == "preparing" or order.status == "ready":
 
@@ -148,8 +148,12 @@ def get_today_sales():
 
     for order in orders:
 
-        if order.status == "collected" and order.collected_at is not None and order.collected_at.date() == datetime.now().date():
-            item = session.get(functions.MenuItem, order.item_id)
+        if order.status == "collected":
+            if order.collected_at is not None:
+
+               if order.collected_at.strftime("%d-%m-%Y") == datetime.now().strftime("%d-%m-%Y"):
+            
+                 item = session.get(functions.MenuItem, order.item_id)
 
             if item is not None:
 

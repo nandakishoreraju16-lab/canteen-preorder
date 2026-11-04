@@ -1,10 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import functions
-<<<<<<< HEAD
+
 import endpoints
-=======
->>>>>>> e7499a099c1c48621f3278090c17d92eafd9c721
+
 
 app = FastAPI()
 
