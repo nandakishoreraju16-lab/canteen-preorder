@@ -45,6 +45,7 @@ def get_student_orders(roll_no, active=True):
                 "ordered_at": order.ordered_at.strftime("%d-%m-%Y %H:%M:%S"),
                 "collected_at": order.collected_at
             })
+
     session.close()
     return response
 
