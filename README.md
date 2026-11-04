@@ -21,6 +21,13 @@ Backend: FastAPI + SQLite · Frontend: React
 | Monica | Endpoints E6 to E10 (my orders, next status, cancel, kitchen queue, today's sales) and their rules (status order, cancel only when placed). |
 | Nanda Kishore Raju | Fill the endpoint table with the backend team. Set up the React app and make the Menu, My orders and Kitchen components. |
 
+## Day 2 plan
+| Name | What we will do today |
+|---|---|
+| Jyoshana | want to solve few logical errors in code and want to write error codes for end points |
+| Monica |  |
+| Nanda Kishore Raju |  |
+
 ## Check-ins
 
 | Time | Done | Next | Stuck on |
