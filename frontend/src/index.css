@@ -86,3 +86,10 @@ h1 { margin: 0 0 20px; }
   border-radius: 6px;
   padding: 6px 8px;
 }
+/* Coloured status labels in My orders */
+.status { font-weight: 700; }
+.status.placed { color: #1c7ed6; }
+.status.preparing { color: #f08c00; }
+.status.ready { color: #2f9e44; }
+.status.collected { color: #868e96; }
+.status.cancelled { color: #e03131; }
