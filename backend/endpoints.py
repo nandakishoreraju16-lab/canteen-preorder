@@ -33,12 +33,12 @@ def get_student_orders(roll_no):
             response.append({
                 "id": order.id,
                 "roll_no": order.roll_no,
-                "item_id": order.item_id
+                "item_id": order.item_id,
                 "item_name": item_name,
                 "quantity": order.quantity,
                 "total_price": total_price,
                 "status": order.status,
-                "ordered_at": order.ordered_at,
+                "ordered_at": order.ordered_at.strftime("%d-%m-%Y %H:%M:%S"),
                 "collected_at": order.collected_at
             })
 
@@ -141,7 +141,7 @@ def get_kitchen_queue():
                     "item_name": item_name,
                     "quantity": order.quantity,
                     "status": order.status,
-                    "ordered_at": order.ordered_at
+                    "ordered_at": order.ordered_at.strftime("%d-%m-%Y %H:%M:%S")
                 })
 
     session.close()
