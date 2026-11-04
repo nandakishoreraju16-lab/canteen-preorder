@@ -57,8 +57,8 @@ def orders():
         Order(roll_no="3", item_id=4, quantity=1, status="preparing", ordered_at=datetime.now()), 
         Order(roll_no="4", item_id=5, quantity=2, status="preparing", ordered_at=datetime.now()), 
         Order(roll_no="5", item_id=6, quantity=3, status="ready", ordered_at=datetime.now()), 
-        Order(roll_no="6", item_id=8, quantity=1, status="collected", ordered_at=datetime.now(), collected_at="2026-11-04 14:24:49.063969"), 
-        Order(roll_no="7", item_id=9, quantity=2, status="collected", ordered_at=datetime.now(), collected_at="2026-11-04 16:39:31.023369"), 
+        Order(roll_no="6", item_id=8, quantity=1, status="collected", ordered_at=datetime.now(), collected_at=datetime.now()), 
+        Order(roll_no="7", item_id=9, quantity=2, status="collected", ordered_at=datetime.now(), collected_at=datetime.now()), 
         Order(roll_no="8", item_id=11, quantity=1, status="cancelled", ordered_at=datetime.now()) 
     ] 
     items = session.query(Order).all()
@@ -91,9 +91,25 @@ def get_all_menu_items(category=None, available=None):
     session.close()
     return response
 
+def get_menu_item(item_id):
+    session = Session(engine)
+    item = session.get(MenuItem, item_id)
+    if item is None:
+        session.close()
+        return None
+    response = {
+        "id": item.id,
+        "name": item.name,
+        "available": item.available
+    }
+    session.close()
+    return response
+
 def add_menu_item(name, category, price):
     session = Session(engine)
     item = MenuItem(name=name,category=category,price=price,available=1)
+    session.add(item)
+    session.commit()
     response = {
         "id": item.id,
         "name": item.name,
@@ -101,14 +117,15 @@ def add_menu_item(name, category, price):
         "price": item.price,
         "available": item.available
     }
-    session.add(item)
-    session.commit()
     session.close()
     return response
 
 def update_menu_availability(id, available):
     session = Session(engine)
     item = session.get(MenuItem, id)
+    if item is None:
+        session.close()
+        return None
     item.available = available
     response = {
         "id": item.id,
@@ -124,6 +141,9 @@ def update_menu_availability(id, available):
 def place_order(roll_no, item_id, quantity):
     session = Session(engine)
     order = Order(roll_no=roll_no,item_id=item_id,quantity=quantity,status="placed")
+    session.add(order)
+    session.commit()
+
     response = {
         "id": order.id,
         "roll_no": order.roll_no,
@@ -132,14 +152,15 @@ def place_order(roll_no, item_id, quantity):
         "status": order.status,
         "ordered_at": order.ordered_at
     }
-    session.add(order)
-    session.commit()
     session.close()
     return response
 
 def get_order_by_id(id):
     session = Session(engine)
     order = session.get(Order, id)
+    if order is None:
+        session.close()
+        return None
     item = session.get(MenuItem, order.item_id)
     response = {
         "id": order.id,
