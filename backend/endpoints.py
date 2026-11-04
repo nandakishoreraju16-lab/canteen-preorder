@@ -21,11 +21,22 @@ def get_student_orders(roll_no):
 
     for order in orders:
         if order.ordered_at.strftime("%d-%m-%Y") == datetime.now().strftime("%d-%m-%Y"):
+            item = session.get(functions.MenuItem, order.item_id)
+
+            if item is not None:
+                item_name = item.name
+                total_price = item.price * order.quantity
+            else:
+                item_name = None
+                total_price = None
+                
             response.append({
                 "id": order.id,
                 "roll_no": order.roll_no,
-                "item_id": order.item_id,
+                "item_id": order.item_id
+                "item_name": item_name,
                 "quantity": order.quantity,
+                "total_price": total_price,
                 "status": order.status,
                 "ordered_at": order.ordered_at,
                 "collected_at": order.collected_at
@@ -152,16 +163,13 @@ def get_today_sales():
 
         if order.status == "collected":
             if order.collected_at is not None:
-
-               if order.collected_at.strftime("%d-%m-%Y") == datetime.now().strftime("%d-%m-%Y"):
-            
-                 item = session.get(functions.MenuItem, order.item_id)
-
-            if item is not None:
-
-                total_orders = total_orders + 1
-                total_quantity = total_quantity + order.quantity
-                total_sales = total_sales + (item.price * order.quantity)
+                if order.collected_at.strftime("%d-%m-%Y") == datetime.now().strftime("%d-%m-%Y"):            
+                    item = session.get(functions.MenuItem, order.item_id)
+                    if item is not None:
+                        
+                        total_orders = total_orders + 1
+                        total_quantity = total_quantity + order.quantity
+                        total_sales = total_sales + (item.price * order.quantity)
 
     response = {
         "total_orders": total_orders,
