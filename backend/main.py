@@ -62,7 +62,10 @@ def place_order(roll_no:str,item_id:int,quantity:int):
 # E5 - Get One Order
 @app.get("/orders/{id}")
 def get_order(id: int):
-    return functions.get_order_by_id(id)
+    result = functions.get_order_by_id(id)
+    if result is None:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return result
 
 
 # E6 - Get Student's Orders for Today
