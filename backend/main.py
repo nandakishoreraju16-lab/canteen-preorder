@@ -94,7 +94,8 @@ def place_order(roll_no:str,item_id:int,quantity:int):
         raise HTTPException(status_code=404,detail="Menu item not found")
     if item["available"] == 0:
         raise HTTPException(status_code=400,detail="This item is sold out today.")
-    order_count = (endpoints.get_student_orders(roll_no))
+    orders = (endpoints.get_student_orders(roll_no, active=True))
+    order_count = len(orders)
     if order_count >= 2:
         raise HTTPException(status_code=400,detail="Student already has 2 active orders")
     return functions.place_order(roll_no=roll_no,item_id=item_id,quantity=quantity)

@@ -7,18 +7,14 @@ import functions
 
 # E6 - Get Student's Orders for Today
 
-def get_student_orders(roll_no):
+def get_student_orders(roll_no,active=True):
 
     session = Session(functions.engine)
 
     orders = session.query(functions.Order).filter(
         functions.Order.roll_no == roll_no
     ).order_by(functions.Order.ordered_at.desc()).all()
-    
-    
-
     response = []
-
     for order in orders:
         if order.ordered_at.strftime("%d-%m-%Y") == datetime.now().strftime("%d-%m-%Y"):
             item = session.get(functions.MenuItem, order.item_id)
