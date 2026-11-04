@@ -18,9 +18,7 @@ def get_student_orders(roll_no):
     response = []
 
     for order in orders:
-
-        if order.ordered_at() == datetime.now():
-
+        if functions.order.ordered_at == datetime.now():
             response.append({
                 "id": order.id,
                 "roll_no": order.roll_no,
@@ -32,7 +30,6 @@ def get_student_orders(roll_no):
             })
 
     session.close()
-
     return response
 
 
@@ -48,7 +45,6 @@ def move_order_to_next_status(order_id):
     }
 
     session = Session(functions.engine)
-
     order = session.get(functions.Order, order_id)
 
     if order is None:
@@ -65,7 +61,6 @@ def move_order_to_next_status(order_id):
         order.collected_at = datetime.now()
 
     session.commit()
-
     response = {
         "message": "Order status updated successfully",
         "order_id": order.id,
@@ -74,7 +69,6 @@ def move_order_to_next_status(order_id):
     }
 
     session.close()
-
     return response
 
 
@@ -83,7 +77,6 @@ def move_order_to_next_status(order_id):
 def cancel_order(order_id):
 
     session = Session(functions.engine)
-
     order = session.get(functions.Order, order_id)
 
     if order is None:
@@ -95,7 +88,6 @@ def cancel_order(order_id):
         raise HTTPException(status_code=400, detail="Order cannot be cancelled")
 
     order.status = "cancelled"
-
     session.commit()
 
     response = {
@@ -105,7 +97,6 @@ def cancel_order(order_id):
     }
 
     session.close()
-
     return response
 
 
@@ -114,14 +105,12 @@ def cancel_order(order_id):
 def get_kitchen_queue():
 
     session = Session(functions.engine)
-
     orders = session.query(functions.Order).order_by(functions.Order.ordered_at).all()
 
     response = []
-
     for order in orders:
 
-        if order.ordered_at.date() == datetime.now():
+        if order.ordered_at == datetime.now():
 
             if order.status == "placed" or order.status == "preparing" or order.status == "ready":
 
@@ -143,7 +132,6 @@ def get_kitchen_queue():
                 })
 
     session.close()
-
     return response
 
 
@@ -152,7 +140,6 @@ def get_kitchen_queue():
 def get_today_sales():
 
     session = Session(functions.engine)
-
     orders = session.query(functions.Order).all()
 
     total_orders = 0
@@ -162,7 +149,6 @@ def get_today_sales():
     for order in orders:
 
         if order.status == "collected" and order.collected_at is not None and order.collected_at.date() == datetime.now().date():
-
             item = session.get(functions.MenuItem, order.item_id)
 
             if item is not None:
@@ -178,5 +164,4 @@ def get_today_sales():
     }
 
     session.close()
-
     return response
