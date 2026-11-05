@@ -107,7 +107,11 @@ def get_menu_item(item_id):
 
 def add_menu_item(name, category, price):
     session = Session(engine)
-    item = MenuItem(name=name,category=category,price=price,available=1)
+    item = session.query(MenuItem).filter(MenuItem.name == name).first()
+    if item is not None:
+        session.close()
+        return None
+    item = MenuItem(name=name, category=category, price=price, available=1)
     session.add(item)
     session.commit()
     response = {

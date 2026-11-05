@@ -27,7 +27,10 @@ def add_menu(name:str,category:str,price:int):
         raise HTTPException(status_code=422,detail="Invalid category")
     if price < 5 or price > 500:
         raise HTTPException(status_code=422,detail="Price must be between 5 and 500")
-    return functions.add_menu_item(name=name,category=category,price=price)
+    item = functions.add_menu_item(name=name, category=category, price=price) 
+    if item is None: 
+        raise HTTPException(status_code=400, detail="Item already exists") 
+    return item
 
 # E3 - Update Menu Availability
 @app.patch("/menu/{id}/availability")
