@@ -5,31 +5,45 @@ from fastapi import HTTPException
 import functions
 
 
+
 # E6 - Get Student's Orders for Today
 
-def get_student_orders(roll_no):
+def get_student_orders(roll_no, active=False):
 
     session = Session(functions.engine)
 
     orders = session.query(functions.Order).filter(
         functions.Order.roll_no == roll_no
     ).order_by(functions.Order.ordered_at.desc()).all()
-    
-    
 
     response = []
 
     for order in orders:
+
         if order.ordered_at.strftime("%d-%m-%Y") == datetime.now().strftime("%d-%m-%Y"):
-            response.append({
-                "id": order.id,
-                "roll_no": order.roll_no,
-                "item_id": order.item_id,
-                "quantity": order.quantity,
-                "status": order.status,
-                "ordered_at": order.ordered_at,
-                "collected_at": order.collected_at
-            })
+
+            if active == False or (order.status != "collected" and order.status != "cancelled"):
+
+                item = session.get(functions.MenuItem, order.item_id)
+
+                if item is not None:
+                    item_name = item.name
+                    total_price = item.price * order.quantity
+                else:
+                    item_name = None
+                    total_price = None
+
+                response.append({
+                    "id": order.id,
+                    "roll_no": order.roll_no,
+                    "item_id": order.item_id,
+                    "item_name": item_name,
+                    "quantity": order.quantity,
+                    "total_price": total_price,
+                    "status": order.status,
+                    "ordered_at": order.ordered_at.strftime("%d-%m-%Y %H:%M:%S"),
+                    "collected_at": order.collected_at
+                })
 
     session.close()
     return response
@@ -130,7 +144,7 @@ def get_kitchen_queue():
                     "item_name": item_name,
                     "quantity": order.quantity,
                     "status": order.status,
-                    "ordered_at": order.ordered_at
+                    "ordered_at": order.ordered_at.strftime("%d-%m-%Y %H:%M:%S")
                 })
 
     session.close()
@@ -152,16 +166,13 @@ def get_today_sales():
 
         if order.status == "collected":
             if order.collected_at is not None:
-
-               if order.collected_at.strftime("%d-%m-%Y") == datetime.now().strftime("%d-%m-%Y"):
-            
-                 item = session.get(functions.MenuItem, order.item_id)
-
-            if item is not None:
-
-                total_orders = total_orders + 1
-                total_quantity = total_quantity + order.quantity
-                total_sales = total_sales + (item.price * order.quantity)
+                if order.collected_at.strftime("%d-%m-%Y") == datetime.now().strftime("%d-%m-%Y"):            
+                    item = session.get(functions.MenuItem, order.item_id)
+                    if item is not None:
+                        
+                        total_orders = total_orders + 1
+                        total_quantity = total_quantity + order.quantity
+                        total_sales = total_sales + (item.price * order.quantity)
 
     response = {
         "total_orders": total_orders,
