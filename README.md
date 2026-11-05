@@ -28,6 +28,10 @@ Backend: FastAPI + SQLite · Frontend: React
 | Monica |  |
 | Nanda Kishore Raju |  |
 
+Over all contributions:
+Jyoshna:
+I created the database tables, developed the first five API endpoints and their backend functions, connected the frontend to the backend, and helped Raju with testing in frotend related to my endpoints.
+
 ## Check-ins
 
 | Time | Done | Next | Stuck on |
