@@ -29,9 +29,9 @@ Backend: FastAPI + SQLite · Frontend: React
 | Nanda Kishore Raju |  |
 
 ## Over all contributions:
-Jyoshna:
+## Jyoshna:
 I created the database tables, developed the first five API endpoints and their backend functions, connected the frontend to the backend, and helped Raju with testing in frotend related to my endpoints.
-Monica:
+## Monica:
  I worked on backend tasks E6–E10, which include displaying student orders, updating order status, cancelling orders, managing the kitchen queue, and calculating daily sales. I used Python, FastAPI, SQLAlchemy, and SQLite and tested the APIs using Swagger.
 
 ## Check-ins
