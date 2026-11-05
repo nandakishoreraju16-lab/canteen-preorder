@@ -25,8 +25,8 @@ Backend: FastAPI + SQLite · Frontend: React
 | Name | What we will do today |
 |---|---|
 | Jyoshana | want to solve few logical errors in code and want to write error codes for end points |
-| Monica |  |
-| Nanda Kishore Raju |  |
+| Monica | want to test all my end points works correct  |
+| Nanda Kishore Raju | want to implement frontend according to end points  |
 
 ## Over all contributions:
 ## Jyoshna:
