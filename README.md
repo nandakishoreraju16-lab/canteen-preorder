@@ -46,9 +46,9 @@ The frontend is working now, but from my side I still feel it can be improved.
 | #   | What it does                                                          | Method | Path                           | Request body / Parameters         | Success code | Error codes   |
 | --- | --------------------------------------------------------------------- | ------ | ------------------------------ | --------------------------------- | ------------ | ------------- |
 | E1  | Get the menu. Filter by category and show only available items.       | GET    | `/menu`                        | Optional: `category`, `available` | 200          | 422           |
-| E2  | Add a new menu item with name, category and price.                    | POST   | `/menu`                        | `name`, `category`, `price`       | 201          | 400, 422      |
+| E2  | Add a new menu item with name, category and price.                    | POST   | `/menu`                        | `name`, `category`, `price`       | 200          | 400, 422      |
 | E3  | Mark a menu item available or sold out.                               | PATCH  | `/menu/{item_id}/availability` | `available` (1 or 0)              | 200          | 404, 422      |
-| E4  | Place an order using roll number, item ID and quantity.               | POST   | `/orders`                      | `roll_no`, `item_id`, `quantity`  | 201          | 400, 404, 422 |
+| E4  | Place an order using roll number, item ID and quantity.               | POST   | `/orders`                      | `roll_no`, `item_id`, `quantity`  | 200          | 400, 404, 422 |
 | E5  | Get an order by its ID, including item name and total price.          | GET    | `/orders/{order_id}`           | `order_id` in path                | 200          | 404           |
 | E6  | Get one student's orders for today, newest first.                     | GET    | `/orders/student/{roll_no}`    | `roll_no` in path                 | 200          | 422           |
 | E7  | Move an order to its next status.                                     | PATCH  | `/orders/{order_id}/next`      | `order_id` in path                | 200          | 400, 404      |
