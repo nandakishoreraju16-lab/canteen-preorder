@@ -27,7 +27,10 @@ def add_menu(name:str,category:str,price:int):
         raise HTTPException(status_code=422,detail="Invalid category")
     if price < 5 or price > 500:
         raise HTTPException(status_code=422,detail="Price must be between 5 and 500")
-    return functions.add_menu_item(name=name,category=category,price=price)
+    item = functions.add_menu_item(name=name, category=category, price=price) 
+    if item is None: 
+        raise HTTPException(status_code=400, detail="Item already exists") 
+    return item
 
 # E3 - Update Menu Availability
 @app.patch("/menu/{id}/availability")
@@ -62,7 +65,10 @@ def place_order(roll_no:str,item_id:int,quantity:int):
 # E5 - Get One Order
 @app.get("/orders/{id}")
 def get_order(id: int):
-    return functions.get_order_by_id(id)
+    result = functions.get_order_by_id(id)
+    if result is None:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return result
 
 
 # E6 - Get Student's Orders for Today
