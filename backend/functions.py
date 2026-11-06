@@ -24,7 +24,7 @@ class Order(Base):
     status = Column(String, default="placed") 
     ordered_at = Column(DateTime, default=datetime.now) 
     collected_at = Column(DateTime, nullable=True) 
-Base.metadata.create_all(engine) 
+Base.metadata.create_all(engine)  
  
 def menu_items(): 
     session = Session(engine) 
@@ -113,7 +113,6 @@ def add_menu_item(name, category, price):
         return None
     item = MenuItem(name=name, category=category, price=price, available=1)
     session.add(item)
-    session.commit()
     response = {
         "id": item.id,
         "name": item.name,
@@ -121,6 +120,7 @@ def add_menu_item(name, category, price):
         "price": item.price,
         "available": item.available
     }
+    session.commit()
     session.close()
     return response
 
@@ -131,6 +131,7 @@ def update_menu_availability(id, available):
         session.close()
         return None
     item.available = available
+    
     response = {
         "id": item.id,
         "name": item.name,
